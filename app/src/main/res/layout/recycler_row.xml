@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
     android:outlineProvider="bounds"
     android:elevation="2dp"
     android:orientation="vertical">
@@ -15,7 +15,7 @@
             android:id="@+id/rec_img"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="18dp"
             android:src="@drawable/apple"></ImageView>
 
@@ -46,6 +46,14 @@
                 android:textSize="16sp"></TextView>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-    </LinearLayout>
 
+    </LinearLayout>
+       <ImageView
+           android:id="@+id/rec_favourite"
+           android:layout_width="16dp"
+           android:layout_height="16dp"
+           android:layout_gravity="end"
+           android:layout_margin="10dp"
+           android:src="@drawable/favourite_black">
+       </ImageView>
 </LinearLayout>

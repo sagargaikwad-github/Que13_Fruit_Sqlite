@@ -7,16 +7,18 @@ public class FruitData {
     String short_desc;
     String desc;
     String email;
+    int favourite;
 
 
 
-    public FruitData(int id, int image, String name, String short_desc, String desc, String email) {
+    public FruitData(int id, int image, String name, String short_desc, String desc, String email, int favourite) {
         this.id = id;
         this.image = image;
         this.name = name;
         this.desc = desc;
         this.short_desc = short_desc;
         this.email = email;
+        this.favourite=favourite;
 
 
     }
@@ -24,6 +26,14 @@ public class FruitData {
     public FruitData(DBManager dbManager) {
     }
 
+
+    public int getFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(int favourite) {
+        this.favourite = favourite;
+    }
     public int getId() {
         return id;
     }

@@ -52,6 +52,8 @@ public class FruitDetails2 extends AppCompatActivity {
         int d=bundle.getInt("ID");
 
 
+
+
 //        getdata();
 //        arrayList=getdata();
 

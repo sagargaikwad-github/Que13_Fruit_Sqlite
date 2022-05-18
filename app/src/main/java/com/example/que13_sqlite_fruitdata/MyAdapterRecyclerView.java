@@ -54,6 +54,8 @@ public class MyAdapterRecyclerView extends RecyclerView.Adapter<MyAdapterRecycle
     private ArrayList<FruitData> itemsListFilter = new ArrayList<>();
     private MainActivity mainActivity;
     private DeleteDataInterface deleteDataInterface;
+    int fav_click;
+    int fav_id;
 
     public MyAdapterRecyclerView(ArrayList<FruitData> arrayList, Context context,DeleteDataInterface deleteDataInterface) {
         this.arrayList = arrayList;
@@ -72,7 +74,6 @@ public class MyAdapterRecyclerView extends RecyclerView.Adapter<MyAdapterRecycle
 
     @Override
     public void onBindViewHolder(@NonNull holder holder, @SuppressLint("RecyclerView") int position) {
-
         //final FruitData temp=arrayList.get(position);
 
          FruitData temp = arrayList.get(position);
@@ -83,7 +84,43 @@ public class MyAdapterRecyclerView extends RecyclerView.Adapter<MyAdapterRecycle
         holder.r_name.setText(temp.getName());
         holder.r_desc.setText(temp.getShort_desc());
 
-       switch (temp.getId())
+
+        fav_click=temp.getFavourite();
+        switch (fav_click)
+        {
+            case 0:
+                holder.r_favourite.setImageResource(R.drawable.ic_fav_black);
+                break;
+            case 1:
+                holder.r_favourite.setImageResource(R.drawable.favourite_red);
+                break;
+        }
+
+        holder.r_favourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fav_click=temp.getFavourite();
+                fav_id=temp.getId();
+                if(fav_click==1)
+                {
+                    fav_click=0;
+                    holder.r_favourite.setImageResource(R.drawable.ic_fav_black);
+                    deleteDataInterface.favourite(fav_id,fav_click);
+                    Toast.makeText(context, "Removed From Favourites", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    fav_click=1;
+                    holder.r_favourite.setImageResource(R.drawable.favourite_red);
+                    deleteDataInterface.favourite(fav_id,fav_click);
+                    Toast.makeText(context, "Added to Favourites", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+        switch (temp.getId())
        {
            case 0:
                Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/415/415682.png").into(holder.r_img);
@@ -127,6 +164,8 @@ public class MyAdapterRecyclerView extends RecyclerView.Adapter<MyAdapterRecycle
 //
 //        holder.r_name.setText(text);
 //        holder.r_img.setImageResource(img);
+
+
 
         holder.r_name.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -359,13 +398,17 @@ public class MyAdapterRecyclerView extends RecyclerView.Adapter<MyAdapterRecycle
 
     class holder extends RecyclerView.ViewHolder {
         TextView r_name,r_desc;
-        ImageView r_img;
+        ImageView r_img,r_favourite;
 
         public holder(@NonNull View itemView) {
             super(itemView);
             r_name = itemView.findViewById(R.id.rec_name);
             r_img = itemView.findViewById(R.id.rec_img);
             r_desc = itemView.findViewById(R.id.rec_desc);
+
+
+            r_favourite = itemView.findViewById(R.id.rec_favourite);
+
 
 
         }

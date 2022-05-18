@@ -34,9 +34,8 @@ public class LoginActivity extends AppCompatActivity {
         String log_email=sharedPreferences.getString("Email"," ");
         String log_password=sharedPreferences.getString("Password"," ");
 
-
-     user.setText(log_email);
-     pass.setText(log_password);
+       user.setText(log_email);
+//     pass.setText(log_password);
 //        String e=user.getText().toString();
 //        String p=pass.getText().toString();
 
@@ -71,7 +70,6 @@ public class LoginActivity extends AppCompatActivity {
                        SharedPreferences.Editor myedit=Login.edit();
                        myedit.putString("isLogin", a);
                        myedit.apply();
-
 
                        Intent intent=new Intent(LoginActivity.this,FruitMainActivity.class);
                        startActivity(intent);

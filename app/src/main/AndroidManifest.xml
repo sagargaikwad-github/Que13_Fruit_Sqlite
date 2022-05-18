@@ -15,8 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Que13_SQLite_FruitData">
         <activity
+            android:name=".FavouriteList_Activity"
+            android:exported="true"
+            android:theme="@style/FavouriteTheme"
+            android:parentActivityName=".FruitMainActivity">
+        </activity>
+        <activity
             android:name=".SplashScreen"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,21 +31,24 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".FruitDetails"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".FruitDetails2"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".FruitMainActivity"
-            android:exported="true"></activity>
+            android:exported="true">
+
+            <!-- <meta-data -->
+            <!-- android:name="android.support.PARENT_ACTIVITY" -->
+            <!-- android:value="com.example.que13_sqlite_fruitdata.FruitMainActivity" /> -->
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -7,18 +7,28 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -39,8 +49,12 @@ public class FruitMainActivity extends AppCompatActivity implements DeleteDataIn
     ArrayList<FruitData> a1 ;
     SearchView searchView;
     int image;
-    Button logout;
+    TextView logout;
     String name,short_desc,desc,email;
+    Toolbar toolbar;
+    public DrawerLayout drawerLayout;
+    public ActionBarDrawerToggle toggle;
+    NavigationView nav;
 
 
     @Override
@@ -52,7 +66,49 @@ public class FruitMainActivity extends AppCompatActivity implements DeleteDataIn
         searchView=findViewById(R.id.search);
         logout=findViewById(R.id.logout);
 
+
+          nav=findViewById(R.id.nav);
+
+         toolbar=findViewById(R.id.toolbar);
+         setSupportActionBar(toolbar);
+
+         drawerLayout = findViewById(R.id.drawerLayout);
+         toggle = new ActionBarDrawerToggle(this, drawerLayout,toolbar, R.string.nav_open, R.string.nav_close);
+         drawerLayout.addDrawerListener(toggle);
+         toggle.syncState();
+
+
+//         nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//             @Override
+//             public boolean onNavigationItemSelected(@NonNull MenuItem item)
+//             {
+//                 switch (item.getItemId())
+//                 {
+//                     case R.id.nav_home:
+//                         Intent intent=new Intent(this,FruitMainActivity.class);
+//                         drawerLayout.closeDrawer(GravityCompat.START);
+//                         break;
+//                     case R.id.nav_favoutite:
+//                         Toast.makeText(FruitMainActivity.this, "Favourite", Toast.LENGTH_SHORT).show();
+//                         drawerLayout.closeDrawer(GravityCompat.START);
+//                         break;
+//                 }
+//                 return true;
+//             }
+//         });
+
+        nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id=item.getItemId();
+                selectItem(id);
+                return true;
+            }
+        });
+
         DBManager dbManager=new DBManager(FruitMainActivity.this);
+
+
 //        dbManager.addphoto(0, String.valueOf(R.drawable.apple));
 //        dbManager.addphoto(1, String.valueOf(R.drawable.bananas));
 //        dbManager.addphoto(2, String.valueOf(R.drawable.lemon));
@@ -226,7 +282,6 @@ public class FruitMainActivity extends AppCompatActivity implements DeleteDataIn
 //                }
 //            }
 
-
     }
 
     private void filter(String s) {
@@ -253,7 +308,6 @@ public class FruitMainActivity extends AppCompatActivity implements DeleteDataIn
         }
 
     }
-
 
 
 //    private void savedata(ArrayList<FruitData> list, String key) {
@@ -288,9 +342,50 @@ public class FruitMainActivity extends AppCompatActivity implements DeleteDataIn
         myAdapterRecyclerView.notifyDataSetChanged();
         Toast.makeText(this, "Data Deleted", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void favourite(int id,int val) {
+        DBManager dbManager=new DBManager(FruitMainActivity.this);
+        dbManager.fav_update(id,val);
+
+         Parcelable state=recyclerView.getLayoutManager().onSaveInstanceState();
+         myAdapterRecyclerView = new MyAdapterRecyclerView(dbManager.getlist(), FruitMainActivity.this, this);
+         recyclerView.setAdapter(myAdapterRecyclerView);
+         recyclerView.getLayoutManager().onRestoreInstanceState(state);
+        //myAdapterRecyclerView.notifyDataSetChanged();
+
+
+    }
+
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        finishAffinity();
+
+
+        new AlertDialog.Builder(FruitMainActivity.this)
+                .setMessage("Do you want to Exit ?")
+                .setNegativeButton("No",null)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finishAffinity();
+                    }
+                })
+                .show();
+
     }
+
+    public void selectItem(int position) {
+        Intent intent = null;
+        switch(position) {
+            case R.id.nav_home:
+                intent = new Intent(this, FruitMainActivity.class);
+                Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_favoutite:
+                intent = new Intent(this, FavouriteList_Activity.class);
+                break;
+        }
+        startActivity(intent);
+    }
+
 }

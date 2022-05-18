@@ -32,7 +32,7 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     public DBManager(Context context) {
-        super(context, dbname, null, 1);
+        super(context, dbname, null, 2);
 
     }
 
@@ -133,6 +133,7 @@ public class DBManager extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("Insert into tbl_fruit values(9,'image10','Cherry', 'Have a cherry-on-top kind of day!',  'A cherry is the fruit of many plants of the genus Prunus, and is a fleshy drupe (stone fruit). Commercial cherries are obtained from cultivars of several species, such as the sweet Prunus avium and the sour Prunus cerasus. The name cherry also refers to the cherry tree and its wood, and is sometimes applied to almonds and visually similar flowering trees in the genus Prunus, as in ornamental cherry or cherry blossom. Wild cherry may refer to any of the cherry species growing outside cultivation, although Prunus avium is often referred to specifically by the name wild cherry in the British Isles.','https://en.wikipedia.org/wiki/Cherry\')");
 
 //        addphoto(1);
+        sqLiteDatabase.execSQL("ALTER TABLE tbl_fruit ADD COLUMN favourite int");
 
 //        @SuppressLint("ResourceType") InputStream inputstream = context.getResources().openRawResource(R.drawable.apple);
 //        Bitmap bitmap1 = BitmapFactory.decodeStream(inputstream);
@@ -200,17 +201,12 @@ public class DBManager extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS tbl_register");
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS tbl_fruit");
-        onCreate(sqLiteDatabase);
-//        switch (i) {
-//            case 1:
+        if(i1==2)
+        {
+            sqLiteDatabase.execSQL("ALTER TABLE tbl_fruit ADD COLUMN favourite int");
+        }
 
-//            case 2:
 
-//                break;
-//            }
-        //onCreate(sqLiteDatabase);
     }
 
     public String addRecord(String p1, String p2, String p3, String p4) {
@@ -288,9 +284,9 @@ public class DBManager extends SQLiteOpenHelper {
                 String fruit_sd = cursor.getString(3);
                 String fruit_desc = cursor.getString(4);
                 String fruit_website = cursor.getString(5);
+                int fruit_favourite = cursor.getInt(6);
 
-
-                list.add(new FruitData(fruit_id, fruit_image, fruit_name, fruit_sd, fruit_desc, fruit_website));
+                list.add(new FruitData(fruit_id, fruit_image, fruit_name, fruit_sd, fruit_desc, fruit_website,fruit_favourite));
             } while (cursor.moveToNext());
         } else {
 
@@ -459,5 +455,48 @@ public class DBManager extends SQLiteOpenHelper {
         cv.put("id",id);
         cv.put("image",byteArray);
         db.update("tbl_fruit",cv,"id=?", new String[]{String.valueOf(id)});
+    }
+
+    public void ins_favourite()
+    {
+        int favourite=0;
+        db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("favourite", favourite);
+        db.update("tbl_fruit",cv, null,null);
+    }
+
+    public void fav_update(int id,int val)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues cv=new ContentValues();
+        cv.put("favourite",val);
+        db.update("tbl_fruit",cv,"id=?", new String[]{String.valueOf(id)});
+
+    }
+    public ArrayList<FruitData> fav_list()
+    {
+        ArrayList<FruitData> arrayList = new ArrayList<>();
+        String qry = "select * from tbl_fruit where favourite=1;";
+        db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(qry, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int fruit_id = cursor.getInt(0);
+                int fruit_image = cursor.getInt(1);
+                String fruit_name = cursor.getString(2);
+                String fruit_sd = cursor.getString(3);
+                String fruit_desc = cursor.getString(4);
+                String fruit_website = cursor.getString(5);
+                int fruit_favourite = cursor.getInt(6);
+
+
+                arrayList.add(new FruitData(fruit_id, fruit_image, fruit_name, fruit_sd, fruit_desc, fruit_website,fruit_favourite));
+            } while (cursor.moveToNext());
+        } else {
+
+        }
+        return arrayList;
     }
 }

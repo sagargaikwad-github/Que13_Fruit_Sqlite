@@ -7,6 +7,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     EditText name,email,password,phone;
     Button register;
     String Name,Email,Password,Phone;
+    TextView alreadyauser;
     ArrayList<FruitData>arrayList;
 
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         password=findViewById(R.id.password3);
         phone=findViewById(R.id.phone3);
         register=findViewById(R.id.register3);
+        alreadyauser=findViewById(R.id.alreadyuser);
 
 
 //        Name=name.getText().toString();
@@ -43,7 +46,13 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences=getSharedPreferences("Register",MODE_PRIVATE);
 
-
+alreadyauser.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+        startActivity(intent);
+    }
+});
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
