@@ -100,29 +100,29 @@ public class FavouriteListAdapter extends RecyclerView.Adapter<FavouriteListAdap
         switch (fav_click)
         {
             case 0:
-                holder.r_favourite.setImageResource(R.drawable.ic_fav_black);
+                holder.r_favourite_img.setImageResource(R.drawable.ic_fav_black);
                 break;
             case 1:
-                holder.r_favourite.setImageResource(R.drawable.favourite_red);
+                holder.r_favourite_img.setImageResource(R.drawable.favourite_red);
                 break;
         }
 
-        holder.r_favourite.setOnClickListener(new View.OnClickListener() {
+        holder.r_favourite_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fav_click=temp.getFavourite();
                 fav_id=temp.getId();
-                if(fav_click==1)
+                if(fav_click==0)
                 {
-                    fav_click=0;
-                    holder.r_favourite.setImageResource(R.drawable.ic_fav_black);
+                    fav_click=1;
+                    holder.r_favourite_img.setImageResource(R.drawable.ic_fav_black);
                     deleteDataInterface.favourite(fav_id,fav_click);
                     Toast.makeText(context, "Removed From Favourites", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    fav_click=1;
-                    holder.r_favourite.setImageResource(R.drawable.favourite_red);
+                    fav_click=0;
+                    holder.r_favourite_img.setImageResource(R.drawable.favourite_red);
                     deleteDataInterface.favourite(fav_id,fav_click);
                     Toast.makeText(context, "Added to Favourites", Toast.LENGTH_SHORT).show();
                 }
@@ -139,13 +139,13 @@ public class FavouriteListAdapter extends RecyclerView.Adapter<FavouriteListAdap
 
     class holder extends RecyclerView.ViewHolder{
         TextView r_name,r_desc;
-        ImageView r_img,r_favourite;
+        ImageView r_img,r_favourite_img;
         public holder(@NonNull View itemView) {
             super(itemView);
-            r_name = itemView.findViewById(R.id.rec_name);
-            r_img = itemView.findViewById(R.id.rec_img);
-            r_desc = itemView.findViewById(R.id.rec_desc);
-            r_favourite = itemView.findViewById(R.id.rec_favourite);
+            r_name = itemView.findViewById(R.id.rec_fruit_name);
+            r_img = itemView.findViewById(R.id.rec_fruit_img);
+            r_desc = itemView.findViewById(R.id.rec_fruit_desc);
+            r_favourite_img = itemView.findViewById(R.id.rec_fruit_favourite);
 
         }
     }

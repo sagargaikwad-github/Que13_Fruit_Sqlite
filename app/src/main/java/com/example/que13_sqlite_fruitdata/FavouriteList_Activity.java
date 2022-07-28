@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -15,14 +14,14 @@ import java.util.ArrayList;
 
 public class FavouriteList_Activity extends AppCompatActivity implements DeleteDataInterface{
     RecyclerView recyclerView;
-    TextView no_data;
+    TextView no_data_tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite_list);
         recyclerView=findViewById(R.id.recyclerview_favourite);
-        no_data=findViewById(R.id.no_data);
+        no_data_tv=findViewById(R.id.no_data_found);
 
          getSupportActionBar().setDisplayHomeAsUpEnabled(true);
          getSupportActionBar().setTitle("Favourite Fruits");
@@ -34,7 +33,7 @@ public class FavouriteList_Activity extends AppCompatActivity implements DeleteD
 
         if(newlist.isEmpty() || dbManager.fav_list()==null)
         {
-           no_data.setVisibility(View.VISIBLE);
+           no_data_tv.setVisibility(View.VISIBLE);
         }
         else
         {
@@ -63,7 +62,7 @@ public class FavouriteList_Activity extends AppCompatActivity implements DeleteD
 
         if(dbManager.fav_list().isEmpty())
         {
-            no_data.setVisibility(View.VISIBLE);
+            no_data_tv.setVisibility(View.VISIBLE);
         }
 
 
