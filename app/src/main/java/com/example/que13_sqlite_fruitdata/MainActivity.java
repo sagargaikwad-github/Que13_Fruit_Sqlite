@@ -15,10 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    EditText name,email,password,phone;
-    Button register;
+    EditText name_et,email_et,password_et,phone_et;
+    Button register_btn;
     String Name,Email,Password,Phone;
-    TextView alreadyauser;
+    TextView alreadyauser_tv;
     ArrayList<FruitData>arrayList;
 
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -31,12 +31,12 @@ public class MainActivity extends AppCompatActivity {
         MyAdapterRecyclerView myAdapterRecyclerView;
 
 
-        name=findViewById(R.id.name3);
-        email=findViewById(R.id.email3);
-        password=findViewById(R.id.password3);
-        phone=findViewById(R.id.phone3);
-        register=findViewById(R.id.register3);
-        alreadyauser=findViewById(R.id.alreadyuser);
+        name_et=findViewById(R.id.register_full_name);
+        email_et=findViewById(R.id.register_email);
+        password_et=findViewById(R.id.register_password);
+        phone_et=findViewById(R.id.register_phone);
+        register_btn=findViewById(R.id.register_btn);
+        alreadyauser_tv=findViewById(R.id.alreadyuser_textview);
 
 
 //        Name=name.getText().toString();
@@ -46,48 +46,45 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences=getSharedPreferences("Register",MODE_PRIVATE);
 
-alreadyauser.setOnClickListener(new View.OnClickListener() {
+   alreadyauser_tv.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         Intent intent=new Intent(MainActivity.this,LoginActivity.class);
         startActivity(intent);
     }
 });
-        register.setOnClickListener(new View.OnClickListener() {
+        register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Name=name.getText().toString();
-                Email=email.getText().toString().trim();
-                Phone=phone.getText().toString().trim();
-                Password=password.getText().toString().trim();
+                Name=name_et.getText().toString();
+                Email=email_et.getText().toString().trim();
+                Phone=phone_et.getText().toString().trim();
+                Password=password_et.getText().toString().trim();
 
                 if(Name.isEmpty())
                 {
-                    name.setError("Can't Empty");
-                    name.requestFocus();
+                    name_et.setError("Can't Empty");
+                    name_et.requestFocus();
                 }
                 else if(Email.isEmpty())
                 {
-                    email.setError("Can't Empty");
-                    email.requestFocus();
+                    email_et.setError("Can't Empty");
+                    email_et.requestFocus();
                 }
                 else if(Phone.isEmpty())
                 {
-                    phone.setError("Can't Empty");
-                    phone.requestFocus();
+                    phone_et.setError("Can't Empty");
+                    phone_et.requestFocus();
                 }
                 else if(Password.isEmpty())
                 {
-                    password.setError("Can't Empty");
-                    password.requestFocus();
+                    password_et.setError("Can't Empty");
+                    password_et.requestFocus();
                 }
                 else
                 {
                     emailvalid();
                 }
-
-
-
             }
 
             private void emailvalid() {
@@ -97,8 +94,8 @@ alreadyauser.setOnClickListener(new View.OnClickListener() {
                     }
                     else
                     {
-                        email.setError("Invalid Email");
-                        email.requestFocus();
+                        email_et.setError("Invalid Email");
+                        email_et.requestFocus();
                     }
             }
 
@@ -137,8 +134,8 @@ alreadyauser.setOnClickListener(new View.OnClickListener() {
                 }
                 else
                 {
-                    phone.setError("Invalid Phone");
-                    phone.requestFocus();
+                    phone_et.setError("Invalid Phone");
+                    phone_et.requestFocus();
                 }
             }
 

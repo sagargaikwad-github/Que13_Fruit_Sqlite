@@ -10,7 +10,7 @@
         tools:context=".FruitDetails">
 
         <ImageView
-            android:id="@+id/image"
+            android:id="@+id/fruit_details_image"
             android:layout_width="182dp"
             android:layout_height="135dp"
             android:layout_marginTop="68dp"
@@ -21,7 +21,7 @@
             app:srcCompat="@drawable/apple" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/fruit_details_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
@@ -29,12 +29,12 @@
             android:textColor="@color/headings"
             android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/image"
-            app:layout_constraintStart_toStartOf="@+id/image"
-            app:layout_constraintTop_toBottomOf="@+id/image" />
+            app:layout_constraintEnd_toEndOf="@+id/fruit_details_image"
+            app:layout_constraintStart_toStartOf="@+id/fruit_details_image"
+            app:layout_constraintTop_toBottomOf="@+id/fruit_details_image" />
 
         <TextView
-            android:id="@+id/description"
+            android:id="@+id/fruit_details_description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="12dp"
@@ -44,13 +44,13 @@
             android:text="Fruit Description"
             android:textColor="@color/text_color"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/name"
+            app:layout_constraintEnd_toEndOf="@+id/fruit_details_name"
             app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="@+id/name"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
+            app:layout_constraintStart_toStartOf="@+id/fruit_details_name"
+            app:layout_constraintTop_toBottomOf="@+id/fruit_details_name" />
 
         <TextView
-            android:id="@+id/link"
+            android:id="@+id/fruit_details_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -65,7 +65,7 @@
             android:textColor="#0590FF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description"
+            app:layout_constraintTop_toBottomOf="@+id/fruit_details_description"
             app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,48 +1,23 @@
 package com.example.que13_sqlite_fruitdata;
 
-import static android.app.Activity.RESULT_OK;
-import static android.content.Context.MODE_PRIVATE;
-
-import static androidx.core.app.ActivityCompat.finishAffinity;
-import static androidx.core.app.ActivityCompat.recreate;
-import static androidx.core.app.ActivityCompat.startActivityForResult;
-import static androidx.core.content.ContextCompat.getDrawable;
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.graphics.SurfaceTexture;
-import android.media.Image;
-import android.net.Uri;
-import android.os.Parcelable;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.SplittableRandom;
 
 
 public class MyAdapterRecyclerView extends RecyclerView.Adapter<MyAdapterRecyclerView.holder>  {
@@ -81,22 +56,22 @@ public class MyAdapterRecyclerView extends RecyclerView.Adapter<MyAdapterRecycle
 //        holder.r_img.setImageResource(arrayList.get(position).getImage());
        // Glide.with(context).load(temp.getImage()).into(holder.r_img);
 
-        holder.r_name.setText(temp.getName());
-        holder.r_desc.setText(temp.getShort_desc());
+        holder.r_name_tv.setText(temp.getName());
+        holder.r_desc_tv.setText(temp.getShort_desc());
 
 
         fav_click=temp.getFavourite();
         switch (fav_click)
         {
             case 0:
-                holder.r_favourite.setImageResource(R.drawable.ic_fav_black);
+                holder.r_favourite_img.setImageResource(R.drawable.ic_fav_black);
                 break;
             case 1:
-                holder.r_favourite.setImageResource(R.drawable.favourite_red);
+                holder.r_favourite_img.setImageResource(R.drawable.favourite_red);
                 break;
         }
 
-        holder.r_favourite.setOnClickListener(new View.OnClickListener() {
+        holder.r_favourite_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fav_click=temp.getFavourite();
@@ -104,14 +79,14 @@ public class MyAdapterRecyclerView extends RecyclerView.Adapter<MyAdapterRecycle
                 if(fav_click==1)
                 {
                     fav_click=0;
-                    holder.r_favourite.setImageResource(R.drawable.ic_fav_black);
+                    holder.r_favourite_img.setImageResource(R.drawable.ic_fav_black);
                     deleteDataInterface.favourite(fav_id,fav_click);
                     Toast.makeText(context, "Removed From Favourites", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
                     fav_click=1;
-                    holder.r_favourite.setImageResource(R.drawable.favourite_red);
+                    holder.r_favourite_img.setImageResource(R.drawable.favourite_red);
                     deleteDataInterface.favourite(fav_id,fav_click);
                     Toast.makeText(context, "Added to Favourites", Toast.LENGTH_SHORT).show();
                 }
@@ -123,34 +98,34 @@ public class MyAdapterRecyclerView extends RecyclerView.Adapter<MyAdapterRecycle
         switch (temp.getId())
        {
            case 0:
-               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/415/415682.png").into(holder.r_img);
+               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/415/415682.png").into(holder.r_fruit_img);
                break;
            case 1:
-               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/2909/2909761.png").into(holder.r_img);
+               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/2909/2909761.png").into(holder.r_fruit_img);
                break;
            case 2:
-               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/7396/7396589.png").into(holder.r_img);
+               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/7396/7396589.png").into(holder.r_fruit_img);
                break;
            case 3:
-               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/135/135620.png").into(holder.r_img);
+               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/135/135620.png").into(holder.r_fruit_img);
                break;
            case 4:
-               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/590/590685.png").into(holder.r_img);
+               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/590/590685.png").into(holder.r_fruit_img);
                break;
            case 5:
-               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/2909/2909899.png").into(holder.r_img);
+               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/2909/2909899.png").into(holder.r_fruit_img);
                break;
            case 6:
-               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/928/928143.png").into(holder.r_img);
+               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/928/928143.png").into(holder.r_fruit_img);
                break;
            case 7:
-               Glide.with(context).load("https://cdn-icons-png.flaticon.com/512/2482/2482074.png").into(holder.r_img);
+               Glide.with(context).load("https://cdn-icons-png.flaticon.com/512/2482/2482074.png").into(holder.r_fruit_img);
                break;
            case 8:
-               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/135/135687.png").into(holder.r_img);
+               Glide.with(context).load("https://cdn-icons-png.flaticon.com/128/135/135687.png").into(holder.r_fruit_img);
                break;
            case 9:
-               Glide.with(context).load("https://cdn-icons-png.flaticon.com/512/540/540242.png").into(holder.r_img);
+               Glide.with(context).load("https://cdn-icons-png.flaticon.com/512/540/540242.png").into(holder.r_fruit_img);
                break;
 
 
@@ -167,7 +142,7 @@ public class MyAdapterRecyclerView extends RecyclerView.Adapter<MyAdapterRecycle
 
 
 
-        holder.r_name.setOnClickListener(new View.OnClickListener() {
+        holder.r_name_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Intent intent=new Intent(context,FruitDetails.class);
@@ -397,17 +372,17 @@ public class MyAdapterRecyclerView extends RecyclerView.Adapter<MyAdapterRecycle
 
 
     class holder extends RecyclerView.ViewHolder {
-        TextView r_name,r_desc;
-        ImageView r_img,r_favourite;
+        TextView r_name_tv,r_desc_tv;
+        ImageView r_fruit_img,r_favourite_img;
 
         public holder(@NonNull View itemView) {
             super(itemView);
-            r_name = itemView.findViewById(R.id.rec_name);
-            r_img = itemView.findViewById(R.id.rec_img);
-            r_desc = itemView.findViewById(R.id.rec_desc);
+            r_name_tv = itemView.findViewById(R.id.rec_fruit_name);
+            r_fruit_img = itemView.findViewById(R.id.rec_fruit_img);
+            r_desc_tv = itemView.findViewById(R.id.rec_fruit_desc);
 
 
-            r_favourite = itemView.findViewById(R.id.rec_favourite);
+            r_favourite_img = itemView.findViewById(R.id.rec_fruit_favourite);
 
 
 

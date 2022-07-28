@@ -1,17 +1,12 @@
 package com.example.que13_sqlite_fruitdata;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,26 +17,19 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 public class FruitMainActivity extends AppCompatActivity implements DeleteDataInterface{
 
     // ListView lv;
-    TextView nodata;
+    TextView nodata_tv;
     ArrayList<FruitData> arrayList;
     String ab;
    RecyclerView recyclerView;
@@ -54,7 +42,7 @@ public class FruitMainActivity extends AppCompatActivity implements DeleteDataIn
     Toolbar toolbar;
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle toggle;
-    NavigationView nav;
+    NavigationView nav_view;
 
 
     @Override
@@ -62,12 +50,11 @@ public class FruitMainActivity extends AppCompatActivity implements DeleteDataIn
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fruit_main);
         // lv = findViewById(R.id.listview);
-        nodata = findViewById(R.id.nodata);
-        searchView=findViewById(R.id.search);
+        nodata_tv= findViewById(R.id.no_data_dashboard);
+        searchView=findViewById(R.id.search_view);
         logout=findViewById(R.id.logout);
 
-
-          nav=findViewById(R.id.nav);
+        nav_view=findViewById(R.id.nav);
 
          toolbar=findViewById(R.id.toolbar);
          setSupportActionBar(toolbar);
@@ -97,7 +84,7 @@ public class FruitMainActivity extends AppCompatActivity implements DeleteDataIn
 //             }
 //         });
 
-        nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id=item.getItemId();
@@ -295,14 +282,14 @@ public class FruitMainActivity extends AppCompatActivity implements DeleteDataIn
         }
         if (filteredlist.isEmpty()) {
             recyclerView.setVisibility(View.INVISIBLE);
-            nodata.setVisibility(View.VISIBLE);
+            nodata_tv.setVisibility(View.VISIBLE);
             searchView.clearFocus();
         }
         else {
             recyclerView.setVisibility(View.VISIBLE);
             myAdapterRecyclerView.filterList(filteredlist);
 //          recyclerView.setAdapter(myAdapterRecyclerView);
-            nodata.setVisibility(View.GONE);
+            nodata_tv.setVisibility(View.GONE);
             myAdapterRecyclerView.notifyDataSetChanged();
 
         }
@@ -353,7 +340,6 @@ public class FruitMainActivity extends AppCompatActivity implements DeleteDataIn
          recyclerView.setAdapter(myAdapterRecyclerView);
          recyclerView.getLayoutManager().onRestoreInstanceState(state);
         //myAdapterRecyclerView.notifyDataSetChanged();
-
 
     }
 

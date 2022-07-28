@@ -7,7 +7,7 @@
     tools:context=".LoginActivity">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/login_page_heading"
         style="@style/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,9 +18,9 @@
         android:textAllCaps="true"
         android:textSize="48sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintEnd_toEndOf="@+id/login_page_photo"
+        app:layout_constraintStart_toStartOf="@+id/login_page_photo"
+        app:layout_constraintTop_toBottomOf="@+id/login_page_photo" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/username_layout"
@@ -32,12 +32,12 @@
         android:textColorHint="@color/black"
         app:boxStrokeColor="#000000"
         app:hintTextColor="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintEnd_toEndOf="@+id/login_page_heading"
+        app:layout_constraintStart_toStartOf="@+id/login_page_heading"
+        app:layout_constraintTop_toBottomOf="@+id/login_page_heading">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username"
+            android:id="@+id/login_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/name"
@@ -63,7 +63,7 @@
         app:passwordToggleTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
+            android:id="@+id/login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/password"
@@ -72,7 +72,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/login_page_photo"
         android:layout_width="168dp"
         android:layout_height="157dp"
         android:layout_marginTop="44dp"
@@ -96,7 +96,7 @@
         app:layout_constraintTop_toBottomOf="@+id/password_layout" />
 
     <TextView
-        android:id="@+id/newregister"
+        android:id="@+id/new_register_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

@@ -42,7 +42,6 @@
 
     <style name="Theme.Que13_SQLite_FruitData.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="Toolbar" parent="Theme.MaterialComponents.DayNight.NoActionBar"></style>
 
     <style name="NavigationDrawer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:textSize">22sp</item>

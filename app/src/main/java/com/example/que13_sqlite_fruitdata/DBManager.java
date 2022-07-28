@@ -218,11 +218,11 @@ public class DBManager extends SQLiteOpenHelper {
         cv.put("password", p4);
 
         long res = db.insert("tbl_register", null, cv);
-
         if (res == -1)
             return "Failed";
         else
             return "Sucessfully Inserted";
+
     }
 
     public boolean checkusername(String username) {
@@ -472,7 +472,6 @@ public class DBManager extends SQLiteOpenHelper {
         ContentValues cv=new ContentValues();
         cv.put("favourite",val);
         db.update("tbl_fruit",cv,"id=?", new String[]{String.valueOf(id)});
-
     }
     public ArrayList<FruitData> fav_list()
     {

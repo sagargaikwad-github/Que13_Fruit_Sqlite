@@ -15,28 +15,26 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-
-
         Handler handler=new Handler(Looper.myLooper());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 SharedPreferences register=getSharedPreferences("Register",MODE_PRIVATE);
-                String a=register.getString("Email","");
-                String b=register.getString("Password","");
+                String SharedPref_Email=register.getString("Email","");
+                String SharedPref_Password=register.getString("Password","");
 
                 SharedPreferences login=getSharedPreferences("Login1",MODE_PRIVATE);
-                String l=login.getString("isLogin","");
+                String Check_Login=login.getString("isLogin","");
 
 
-                if(l.equals("LOGIN"))
+                if(Check_Login.equals("LOGIN"))
                 {
                     Intent intent1=new Intent(SplashScreen.this,FruitMainActivity.class);
                     startActivity(intent1);
                 }
                 else
                 {
-                  if(a.isEmpty())
+                  if(SharedPref_Email.isEmpty())
                   {
                       Intent intent=new Intent(SplashScreen.this,MainActivity.class);
                       startActivity(intent);

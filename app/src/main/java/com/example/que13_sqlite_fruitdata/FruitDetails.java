@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 
 public class FruitDetails extends AppCompatActivity {
-    TextView name, description, link;
-    ImageView image;
+    TextView name_tv, description_tv, link_tv;
+    ImageView image_img;
     int id;
 
 
@@ -25,10 +25,10 @@ public class FruitDetails extends AppCompatActivity {
         setContentView(R.layout.activity_fruit_details);
 
 
-        name = findViewById(R.id.name);
-        description = findViewById(R.id.description);
-        image = findViewById(R.id.image);
-        link = findViewById(R.id.link);
+        name_tv = findViewById(R.id.fruit_details_name);
+        description_tv = findViewById(R.id.fruit_details_description);
+        image_img = findViewById(R.id.fruit_details_image);
+        link_tv = findViewById(R.id.fruit_details_link);
 
 
         Bundle bundle = getIntent().getExtras();
@@ -38,47 +38,47 @@ public class FruitDetails extends AppCompatActivity {
         String fruit_description = bundle.getString("Desc", "");
         String fruit_link = bundle.getString("Email", "");
 
-        name.setText(fruit_name);
-        image.setImageResource(fruit_image);
-        description.setText(fruit_description);
-        link.setText("Read More...");
+        name_tv.setText(fruit_name);
+        image_img.setImageResource(fruit_image);
+        description_tv.setText(fruit_description);
+        link_tv.setText("Read More...");
 
         switch (fruit_id)
         {
             case 0:
-                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/415/415682.png").into(image);
+                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/415/415682.png").into(image_img);
                 break;
             case 1:
-                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/2909/2909761.png").into(image);
+                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/2909/2909761.png").into(image_img);
                 break;
             case 2:
-                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/7396/7396589.png").into(image);
+                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/7396/7396589.png").into(image_img);
                 break;
             case 3:
-                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/135/135620.png").into(image);
+                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/135/135620.png").into(image_img);
                 break;
             case 4:
-                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/590/590685.png").into(image);
+                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/590/590685.png").into(image_img);
                 break;
             case 5:
-                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/2909/2909899.png").into(image);
+                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/2909/2909899.png").into(image_img);
                 break;
             case 6:
-                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/928/928143.png").into(image);
+                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/928/928143.png").into(image_img);
                 break;
             case 7:
-                Glide.with(this).load("https://cdn-icons-png.flaticon.com/512/2482/2482074.png").into(image);
+                Glide.with(this).load("https://cdn-icons-png.flaticon.com/512/2482/2482074.png").into(image_img);
                 break;
             case 8:
-                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/135/135687.png").into(image);
+                Glide.with(this).load("https://cdn-icons-png.flaticon.com/128/135/135687.png").into(image_img);
                 break;
             case 9:
-                Glide.with(this).load("https://cdn-icons-png.flaticon.com/512/540/540242.png").into(image);
+                Glide.with(this).load("https://cdn-icons-png.flaticon.com/512/540/540242.png").into(image_img);
                 break;
 
         }
 
-        link.setOnClickListener(new View.OnClickListener() {
+        link_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
